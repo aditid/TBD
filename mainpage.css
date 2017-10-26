@@ -1,0 +1,30 @@
+body h1{
+    font-family: "Arial Black", Gadget, sans-serif;
+    text-align: center;
+    padding-top: 5%;
+}
+
+
+#contain {
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 100%;
+    letter-spacing: 4px;
+    text-shadow: 0 0 2px black;
+}
+
+#movie{
+    width: 80%;
+    padding: 1em;
+    border-style: solid;
+    border-color: darkblue;
+}
+
+#submit{
+    margin-top: 100px
+    text-align: center;
+    width: 91.2%
+}
