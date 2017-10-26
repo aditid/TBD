@@ -21,7 +21,7 @@ function send() {
 //    alert("debug");
 //    alert(JSONSTUFF.result[0]);
 //    alert("debug");
-    document.getElementById("results").innerHTML = xmlHttp.responseText ;
+    document.getElementById("results").innerHTML = "Total Results: " + JSONSTUFF["total_results"];
 //    document.getElementById("results").innerHTML =  xmlHttp.responseText;
 
 }
