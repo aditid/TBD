@@ -1,29 +1,38 @@
-function send(){
+function send() {
+
     var api = "https://api.themoviedb.org/3/search/movie?api_key=";
     var api_key = "f37192bac1820d00d2a11439b5535fb3";
     var language = "&language=en-US";
     var title_req = "&query=";
-
     var movieTitle;
-    movieTitle = document.getElementById("movie")
-    var ItemJSON;
-
-    // We have to use the .value thing in order for the input to used as a String value.
-
+    movieTitle = document.getElementById("movie");
     URL = api +  api_key + language + title_req + movieTitle.value;
+    //Debugger to make sure URL is properly Created
+    //    alert(URL);
+    var response;
+    // INITIALIZE XMLHttpRequest object
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("POST", URL, false);
+    //Send Request
+    xmlHttp.send();
+    xmlHttp.onreadystatechange = callbackFunction(xmlHttp);
+//    alert(xmlHttp.responseText);
+    var JSONSTUFF = JSON.parse(xmlHttp.responseText);
+//    alert("debug");
+//    alert(JSONSTUFF.result[0]);
+//    alert("debug");
+    document.getElementById("results").innerHTML = xmlHttp.responseText ;
+//    document.getElementById("results").innerHTML =  xmlHttp.responseText;
 
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
-    xmlhttp.open("POST", URL, false);
-    xmlhttp.onreadystatechange = callbackFunction(xmlhttp);
-    xmlhttp.send(ItemJSON);
-    alert(xmlhttp.responseText);
-    document.getElementById("div").innerHTML = xmlhttp.statusText + ":" + xmlhttp.status + "<BR><textarea rows='100' cols='100'>"+ xmlhttp.responseText +"</textarea>";
-
-    console.log('Checkout this JSON! ', URL);
 }
 
-function callbackFunction(xmlhttp)
-{
-    //alert(xmlhttp.responseXML);
+function callbackFunction(xmlHttp) {
+    //Ready State change calls it back 5 times . 4 out of five times Process Request gets called not 5.
+    //We dont want the process to end so we need to keep it at 4
+
+    //We also want to check when the HTTP request is successful = code is = 200
+    if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+        var response = JSON.parse(xmlHttp.responseText);
+    }
+
 }
