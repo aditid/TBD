@@ -12,7 +12,7 @@ function send() {
     var response;
     // INITIALIZE XMLHttpRequest object
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("POST", URL, false);
+    xmlHttp.open("GET", URL, false);
     //Send Request
     xmlHttp.send();
     xmlHttp.onreadystatechange = callbackFunction(xmlHttp);
