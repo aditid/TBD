@@ -1,5 +1,15 @@
-<!doctype html>
+<?php
+    require_once "config.php";
+#needed to add local host to "Valid OAuth redirect URIs" in order for authentication to work.
 
+    $redirectURL = "http://localhost:63342/MovieWebsite/login.php/fb-callback.php";
+    #may be useful to change permissions to include birthdays, posts, or things that can help us recommend movies
+    $permissions = ['email'];
+    $loginURL = $helper -> getLoginUrl($redirectURL, $permissions);
+?>
+
+
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +35,7 @@
                 <input  name="email" placeholder="Email" class="form-control"><br>
                 <input  name="email" type="password" placeholder="Password" class="form-control"><br>
                 <input type="submit" value="Log In" class="btn btn-primary">
-                <input type="button" value="Log In with Facebook" class="btn btn-primary">
+                <input type="button" onclick="window.location =  '<?php echo $loginURL?>'"' value="Log In with Facebook" class="btn btn-primary">
 
             </form>
 
