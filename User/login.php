@@ -14,10 +14,14 @@
 
 <body>
 
-    <div class="container" style="margin-top: 100px">
+    <div class="container">
+        <!--GETTING RID OF THE COL and OFFSET WORKS WONDERS-->
         <div class="col-md-6 col-md-offset-3" align="center">
-            <img src=""><br>
+            <h1>Movies4Dayz</h1>
+            <img src=""><br><br>
+
             <form>
+
                 <input  name="email" placeholder="Email" class="form-control"><br>
                 <input  name="email" type="password" placeholder="Password" class="form-control"><br>
                 <input type="submit" value="Log In" class="btn btn-primary">
