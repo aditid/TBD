@@ -1,0 +1,101 @@
+
+
+
+User Database:
+
+
+
+{
+    '_id' : '123456789',
+    'facebookuid' : '12345678901234',
+    'name' : { 'first' : 'John', 'last' : ‘Smith’ },
+    ‘email’ : 'johnsmith@bu.edu',
+    ‘favoriteGenres’ : [ ‘Horror’, ‘Comedy’, ‘Romance’]
+}
+
+// uid: string, not null.
+// facebookuid: string
+// first name: VARCHAR(255)
+// last name: VARCHAR(255)
+// email: string, it is also the username.
+// favoriteGenres: string
+
+// key for this schema: uid.
+
+
+
+Movie Database:
+
+{
+    '_id' : '12340000',
+    'moviedatabasemid' : '223702',
+    ‘name’ : ‘Sausage Party’,
+    ‘genres’ : [ ‘Adventure’, ‘Animation’, ‘Comedy’, 'Fantasy'],
+    ‘coverPhoto’ : LOCATIONID,
+    ‘averageRating’ : 0.83,
+    ‘metaData’ : [
+        {
+            ‘dateOfRelease’ : ‘2016-07-11’,
+        }
+    ],
+    ‘ratings’ : [
+        {
+            ‘userId1’ : 0,
+            ‘userId2’ : 1,
+            ‘userId3’ : 1,
+            ‘userId4’ : 1,
+
+        }
+    ],
+    ‘relatedMovies’ : ['12341230', '23402340', '56705670',…]
+}
+
+// mid: string, not null
+// moviedatabasemid: integer, movie id from moviedb
+
+// name: string, original_title from moviedb
+// genres: string
+// coverPhoto: link to the image 
+// avgrating: double, vote_average from moviedb
+
+// dateofrelease: date, release_data from moviedb
+
+// rating: The initial state is empty. After users rate movies, the rating should
+// include their ratings for the movie. Each rating is an integer, range from 0 to 1.
+
+// relatedmovies: a list of mid 
+
+// key for this schema: mid
+
+
+User-Movie Database:
+
+
+{
+    '_id' : '123456789',
+    ‘averageRating’ : 0.83,
+    ‘favoriteGenres’ : [ ‘Horror’, ‘Comedy’, ‘Romance’],
+    ‘moviesRated’ : [
+        {
+            ‘movieId’ : 987987,
+            ‘rating’ : 1,
+            ‘comments’ : ‘blah blah blah’
+        }, {
+            ‘movieId’ : 876876,
+            ‘rating’ : 0,
+            ‘comments’ : ‘blah blah blah’
+        }
+    ],
+    ‘moviesToWatch’ : ['123123', '234234', '567567',…]
+}
+
+// umid: string
+// averageRating: float
+
+// favoritegenres: a list of strings
+// mid: string, not null, mid from Movie Database
+
+// comments: string
+// moviestowatch: a list of strings 
+
+// key for this schema: umid
