@@ -1,0 +1,29 @@
+{
+  "name": "oauthproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "*",
+    "body-parser": "latest",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "latest",
+    "express": "*",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-session": "*",
+    "mongodb": "*",
+    "mongoose": "^4.13.5",
+    "morgan": "*",
+    "passport": "^0.4.0",
+    "passport-facebook": "*",
+    "passport-http": "*",
+    "passport-local": "*"
+  }
+}
