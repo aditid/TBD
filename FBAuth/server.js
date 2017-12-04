@@ -23,12 +23,14 @@ mongoose.Promise = global.Promise;
 require('./config/passport')(passport);
 
 
-
 //We want morgan as middleware. We use morgan to go to console after a request has been recieved.
 //Every transaction would be logged
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
+
+app.use(express.static(__dirname + '/views'));
+
 
 //Session requires 3 things
 app.use(session({
@@ -47,6 +49,7 @@ app.set('view engine', 'ejs');
 
 
 require('./app/routes.js')(app, passport);
+
 
 app.listen(port);
 console.log('Server running on port: ' + port);

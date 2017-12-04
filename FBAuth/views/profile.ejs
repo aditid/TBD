@@ -3,11 +3,20 @@
 <html>
 <head>
     <title>Main Page</title>
+    <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        body 		{ padding-top:80px; word-wrap:break-word; }
-    </style>
+   <style>
+        body { padding-top:60px; word-wrap:break-word; }
+        body h1{font-weight: bold;}
+        .quiz{text-align: center;}
+        .quiz a{padding: 10px; display: block; width:100%; align-content: center;}
+        .quiz h3{padding-top: 100px;}
+        #incognito-icon{width: 150px; border-radius: 50%; border: 2.5px solid black;}
+        .well{text-align:center;}
+        .icon{ text-align: center;}
+
+   </style>
 </head>
 <body>
 <div class="container">
@@ -20,23 +29,10 @@
 
     <div class="row">
 
-        <!-- LOCAL INFORMATION -->
-<!--        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                <p>
-
-                </p>
-
-            </div>
-        </div>-->
-
         <!-- FACEBOOK INFORMATION -->
-        <div class="col-sm-12 text-center">
-            <div class="well">
+        <div class="col-md-12">
+            <div class="col-md-6 well">
                 <h3 class="text-primary"><span class="fa fa-facebook-square"></span>Facebook Information</h3>
-
                 <p>
 <!--                    <strong>ID</strong></strong>: <%= user.facebook.id %><br>-->
 <!--                    <strong>Token</strong>: <%= user.facebook.token %><br>-->
@@ -44,10 +40,16 @@
                     <strong>Email</strong>: <%= user.facebook.email %><br>
 <!--                    <strong>Gender</strong>: <%= user.facebook.gender %><br>-->
                 </p>
-
+            </div>
+            <div class="col-md-6 icon">
+                <img src="/img/bestprofile.jpg" id="incognito-icon">
             </div>
         </div>
-
+        <hr style="width:100%">
+        <div class="quiz">
+            <h3>Please take this small quiz to get a better understanding of what kind of movies you like!</h3>
+            <a href="/quiz" class="btn btn-default btn-md">Quiz</a>
+        </div>
     </div>
 
 </div>
