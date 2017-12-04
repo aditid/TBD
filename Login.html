@@ -49,13 +49,13 @@
 <body>
 <h2>Login</h2>
 
-<form action="/action_page.php">
+<form action="http://localhost:9000/api/login", method="post", target="blank">
     <div class="container">
         <label><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <input type="text" placeholder="Enter Username" name="username" required>
 
         <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required id = "myInput"><br><br>
+        <input type="password" placeholder="Enter Password" name="password" required id = "myInput"><br><br>
         <input type="checkbox" onclick="myFunction()">Show Password
 
         <script>
