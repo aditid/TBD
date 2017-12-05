@@ -89,6 +89,22 @@
                 </div>
             </div>
         </div>
+        <div class="row" id="recommend2">
+            <div class="center">
+                <div class="col-md-3">
+                    <a><p id="plot1"></p></a>
+                </div>
+                <div class="col-md-3">
+                    <a><p id="plot2"></p></a>
+                </div>
+                <div class="col-md-3">
+                    <a><p id="plot3"></p></a>
+                </div>
+                <div class="col-md-3">
+                    <a><p id="plot4"></p></a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -108,9 +124,22 @@
         url1 = "http://www.omdbapi.com/?t=" + String(replaced) + "&apikey=f74021da";
         omdbInfo = httpGet(url1)
         parsedOmdb = JSON.parse(omdbInfo)
-        console.log(parsedOmdb.Plot)
-        document.getElementById("summary").innerHTML = parsedOmdb.Plot;
+        return parsedOmdb.Plot;
     }
+
+
+
+    function findAndGetRatings(name)
+    {
+        name = name;  //placeholder
+        replaced = name.replace(/ /g, '+')
+        url1 = "http://www.omdbapi.com/?t=" + String(replaced) + "&apikey=f74021da";
+        omdbInfo = httpGet(url1)
+        parsedOmdb = JSON.parse(omdbInfo)
+        return parsedOmdb.Ratings
+    }
+
+
 ////  THIS FUNCTION HAS BEEN UPDATED TO RECEIVE MOVIE RECOMMENDATION BASED ON USER SELECTION !!
     function getId(name)  //TMDB
     {
@@ -159,6 +188,15 @@
         //document.getElementById('recs3').style.visibility = 'hidden';
 
     }
+    function getPlot()
+    {
+        for (i = 0; i < 4; i++) {
+            plot = findAndGetPlot(chosen[i])
+            plotStr = "plot" + String(i+1);
+            document.getElementById(plotStr).innerHTML = plot;
+        }
+    }
+
 
     function httpGet(theUrl)
     {
@@ -190,7 +228,10 @@
 
             recommendationsArray.push(recs);
         }
-       getPictures()
+       getPictures();
+        getPlot();
+
+
     }
 
     function hideFunction(id ,id2) {
