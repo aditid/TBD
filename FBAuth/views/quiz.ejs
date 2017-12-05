@@ -136,13 +136,11 @@
         for (i = 0; i < 4; i++) {
             posterPath = parsedRec.results[i]["poster_path"];
             url4 = "http://image.tmdb.org/t/p/w185" + String(posterPath);
-            //picture = httpGet(url4);
-            //console.log(picture);
             picStr = "poster" + String(i+1);
-            console.log(picStr);
-            //document.getElementById(picStr).src = picture;
+            document.getElementById(picStr).src = url4;   //inserts image url into div
         }
     }
+
     function httpGet(theUrl)
     {
         var xmlHttp = new XMLHttpRequest();
