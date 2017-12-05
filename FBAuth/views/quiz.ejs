@@ -21,7 +21,6 @@
                 <a href="#" onclick="return hideFunction(2);"><img src="./imgQuiz/niceguys.png" id="movie2"></a>
             </div>
         </div>
-
         <div class="row">
             <div class="quiz1bot">
                <a href="#" onclick="return hideFunction(3);"><img src="./imgQuiz/neighbors.jpg" id="movie3"></a>
@@ -49,9 +48,9 @@
 
     <script>
 
-    x = httpGet("https://api.themoviedb.org/3/movie/550/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3")
+/*    x = httpGet("https://api.themoviedb.org/3/movie/550/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3")
     parsedx = JSON.parse(x)
-    console.log(parsedx.results["0"])
+    console.log(parsedx.results["0"])*/
 
     function findAndGetPlot(name)
     {
@@ -107,6 +106,7 @@
 
     function getPictures(parsedRec)
     {
+        console.log(parsedRec)
         for (i = 0; i < 4; i++) {
             posterPath = parsedRec.results[i]["poster_path"];
             url4 = "http://image.tmdb.org/t/p/w185" + String(posterPath);
@@ -119,7 +119,6 @@
 
 
     }
-
     function httpGet(theUrl)
     {
         var xmlHttp = new XMLHttpRequest();
@@ -128,19 +127,38 @@
         return xmlHttp.responseText;
     }
 
-    function hideFunction(id)
-    {
+    // UNCHANGED ADITI FUNCTION //
+/*    function hideFunction(id)
+    {console.log('debug1');
     for (i = 1; i < 5; i++) {
         if (id == i) {
             console.log(i)
+
             parsedRec = getRecommendationsByName(id)
             getPictures(parsedRec)
             }
         else {
-        str = "movie" + String(i);
-        var_name = document.getElementById(String(str)).style.display = 'none';
+        choosen = "movie" + String(i);
+        var_name = document.getElementById(String(choosen)).style.display = 'none';
             }
         }
+    }*/
+
+    function hideFunction(id)
+    {console.log('debug1');
+        for (i = 1; i < 5; i++) {
+            if (id == i) {
+                console.log(i)
+                choosen = "movie" + String(i);
+            }
+            else {
+                others = "movie" + String(i);
+                var_name = document.getElementById(String(others)).style.display = 'none';
+            }
+        }
+        document.getElementById(String(choosen)).style.width = '343px';
+        parsedRec = getRecommendationsByName(id)
+        getPictures(parsedRec)
     }
 
 
