@@ -14,15 +14,108 @@
     <div class="container">
         <div class="row">
             <div class="col-md6 float-left">
-                <a href="#"><img src="./imgQuiz/wardogs.jpg"></a>
-                <a href="#"><img src="./imgQuiz/niceguys.png"></a>
+                <a href="#" onclick="return hideFunction(1);"><img src="./imgQuiz/wardogs.jpg" id="movie1" ></a>
+                <a href="#" onclick="return hideFunction(2);"><img src="./imgQuiz/niceguys.png" id="movie2"></a>
             </div>
             <div class="col-md6 float-right">
-                <a href="#"><img src="./imgQuiz/neighbors.jpg"></a>
-                <a href="#"><img src="./imgQuiz/zootopia.jpeg"></a>
+                <a href="#" onclick="return hideFunction(3);"><img src="./imgQuiz/neighbors.jpg" id="movie3"></a>
+                <a href="#" onclick="return hideFunction(4);"><img src="./imgQuiz/zootopia.jpeg" id="movie4"></a>
+            </div>
+        </div>
+    </div>
+    <div class="container2" id="summary" style="align:right;">
+        Insert text here
+    </div>
+        <div class="container3">
+            <div class="row">
+                <div class="col-md6 float-left">
+                    <a><img src="" id="poster1"></a>
+                </div>
+                <div class="col-md6 float-right">
+                </div>
             </div>
         </div>
 
-    </div>
+    <script>
+
+    x = httpGet("https://api.themoviedb.org/3/movie/550/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3")
+    parsedx = JSON.parse(x)
+    console.log(parsedx.results["0"])
+
+    function findAndGetPlot(name)
+    {
+        name = "war Dogs";  //placeholder
+        replaced = name.replace(/ /g, '+')
+        url1 = "http://www.omdbapi.com/?t=" + String(replaced) + "&apikey=f74021da";
+
+        omdbInfo = httpGet(url1)
+        parsedOmdb = JSON.parse(omdbInfo)
+
+        console.log(parsedOmdb.Plot)
+        document.getElementById("summary").innerHTML = parsedOmdb.Plot;
+    }
+
+    function getRecommendations(name)
+    {
+        name = "war Dogs";  //placeholder
+        replaced = name.replace(/ /g, '%20')
+
+        url2 = "https://api.themoviedb.org/3/search/movie?api_key=f37192bac1820d00d2a11439b5535fb3&language=en-US&query=" + String(replaced)+ "&page=1&include_adult=false"
+        console.log(url2);
+
+
+        tmdbInfo = httpGet(url2);
+        parsedTmdb = JSON.parse(tmdbInfo);
+
+        filmId = parsedTmdb.results["0"]["id"];
+        //document.getElementById("summary").innerHTML = parsedOmdb.Plot;
+        url3 = "https://api.themoviedb.org/3/movie/" + String(filmId) + "/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3"
+
+        recommendations = httpGet(url3);
+        parsedRec = JSON.parse(tmdbInfo);
+
+        for (i = 0; i < 4; i++) {
+            posterPath = parsedTmdb.results[i]["poster_path"];
+            picture = getPictures;
+            picStr = "poster" + String(i+1);
+            document.getElementById("picStr").innerHTML = picture;
+        }
+
+    }
+
+    function getPictures(posterPath)
+    {
+        url4 = "http://image.tmdb.org/t/p/w185" + String(posterPath);
+        return httpGet(url4);
+
+
+    }
+
+    function httpGet(theUrl)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
+    }
+
+    function hideFunction(id)
+    {
+    for (i = 1; i < 5; i++) {
+        if (id == i) {
+            console.log(i)
+            getRecommendations(id)
+            }
+        else {
+        str = "movie" + String(i);
+        var_name = document.getElementById(String(str)).style.display = 'none';
+            }
+        }
+    }
+
+
+
+    </script>
+
 </body>
 </html>
