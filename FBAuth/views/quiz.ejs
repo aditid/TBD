@@ -64,26 +64,32 @@
     </div>
 
     <div class="quiz" id="recs3">
-        <h3>Click for recommendations!</h3>
-        <a href="#" onclick="return main()" class="btn btn-default btn-md">Quiz</a>
+        <div class="center">
+            <h3>Click for recommendations!</h3>
+            <a href="#!" onclick="return main()" class="btn btn-default btn-md">Get Recommendations!</a>
+        </div>
     </div>
-
 
     <!–– this creates whitespace where it is supposed to be, it can be display:none to avoid that––>
     <h1 class="title" id="recs" style="visibility:hidden;">Recommendations</h1>
-    <div class="container topcontainer" id="recs2" style="visibility:hidden;">
-        <div class="row">
-                <div class="col-md6 float-left">
+    <div class="container" id="recs2" style="visibility:hidden;">
+        <div class="row" id="recommend">
+            <div class="center">
+                <div class="col-md-3">
                     <a><img src="" id="poster1"></a>
-                    <a><img src="" id="poster2"></a>
-
                 </div>
-                <div class="col-md6 float-right">
+                <div class="col-md-3">
+                    <a><img src="" id="poster2"></a>
+                </div>
+                <div class="col-md-3">
                     <a><img src="" id="poster3"></a>
+                </div>
+                <div class="col-md-3">
                     <a><img src="" id="poster4"></a>
                 </div>
             </div>
         </div>
+    </div>
 
     <script>
 /*    x = httpGet("https://api.themoviedb.org/3/movie/550/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3")
@@ -139,17 +145,18 @@
 
     function getPictures()
     {
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < 4; i++) {
             posterPath = recommendationsArray[i]["poster_path"];
             console.log(posterPath)
             url4 = "http://image.tmdb.org/t/p/w185" + String(posterPath);
             picStr = "poster" + String(i+1);
             document.getElementById(picStr).src = url4;   //inserts image url into div
         }
+
         //unhide divs
         document.getElementById('recs').style.visibility = 'visible';
         document.getElementById('recs2').style.visibility = 'visible';
-        document.getElementById('recs3').style.visibility = 'hidden';
+        //document.getElementById('recs3').style.visibility = 'hidden';
 
     }
 
@@ -162,11 +169,15 @@
     }
 
     function main(){
+        //add one more movie for a random genre
+        randomNumber0 = Math.floor((Math.random() * 3));
+        chosen.push(chosen[randomNumber0]);
+
         if (chosen.length < 3)
         {
             //alert user here
         }
-        for (i = 0; i < 3; i++) {   //choose random recommendations for each movie
+        for (i = 0; i < 4; i++) {   //choose random recommendations for each movie
             movieName = chosen[i];
 
             parsedRec = getRecommendationsByName(movieName);
