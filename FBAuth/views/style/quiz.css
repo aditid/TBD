@@ -10,8 +10,8 @@ h1{
 }
 
 img{
-    width: 171px;
-    length: 160px;
+    width: 176px;
+    height: 253px;
     display: block;
     float: left;
     border-style: solid;
@@ -21,11 +21,14 @@ img{
 
 
 .topcontainer{
-
-    width: 348px;
+    width: 358px;
     height: 512px;
     border-color: black;
     border-style: solid;
     border-width: 3px;
     margin: auto;
+}
+
+.container2{
+    padding-top: 250px;
 }

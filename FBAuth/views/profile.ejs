@@ -6,12 +6,13 @@
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style/profile.css">
    <style>
-        body { padding-top:60px; word-wrap:break-word; }
+        body { padding-top:40px; word-wrap:break-word; }
         body h1{font-weight: bold;}
         .quiz{text-align: center;}
         .quiz a{padding: 10px; display: block; width:100%; align-content: center;}
-        .quiz h3{padding-top: 100px;}
+        .quiz h3{padding-top: 40px;}
         #incognito-icon{width: 150px; border-radius: 50%; border: 2.5px solid black;}
         .well{text-align:center;}
         .icon{ text-align: center;}
@@ -24,20 +25,21 @@
     <a href="/logout" class="btn btn-default btn-md" style="float:right;">Logout</a>
 
     <div class="page-header text-center">
-        <h1>DashBoard</h1>
+        <h1>Welcome To Movie Recommendations!</h1>
+        <video autoplay loop id="video-background" muted plays-inline>
+            <source src="./mov/moviemontage.mp4" type="video/mp4">
+        </video>
     </div>
-
+    <hr style="width:100%">
     <div class="row">
-
-        <!-- FACEBOOK INFORMATION -->
         <div class="col-md-12">
             <div class="col-md-6 well">
                 <h3 class="text-primary"><span class="fa fa-facebook-square"></span>Facebook Information</h3>
                 <p>
 <!--                    <strong>ID</strong></strong>: <%= user.facebook.id %><br>-->
 <!--                    <strong>Token</strong>: <%= user.facebook.token %><br>-->
-                    <strong>Name</strong>: <%= user.facebook.name %><br>
-                    <strong>Email</strong>: <%= user.facebook.email %><br>
+                    <strong>Hello!</strong>: <%= user.facebook.name %><br>
+                    <strong>We will spam the following email!</strong>: <%= user.facebook.email %><br>
 <!--                    <strong>Gender</strong>: <%= user.facebook.gender %><br>-->
                 </p>
             </div>
