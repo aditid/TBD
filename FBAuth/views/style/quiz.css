@@ -1,0 +1,31 @@
+/*.container{
+    background-color: beige;
+}*/
+.comedytitle{
+    padding-top: 30px;
+}
+
+h1{
+    text-align: center;
+}
+
+img{
+    width: 171px;
+    length: 160px;
+    display: block;
+    float: left;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}
+
+
+.topcontainer{
+
+    width: 348px;
+    height: 512px;
+    border-color: black;
+    border-style: solid;
+    border-width: 3px;
+    margin: auto;
+}

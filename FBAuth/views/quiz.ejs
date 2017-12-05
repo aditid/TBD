@@ -5,23 +5,30 @@
     <title>Log In Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="./style/quiz.css">
     <style>
-        body 		{ padding-top:80px; }
-        img {width: 200px;}
     </style>
 </head>
 <body>
-    <div class="container">
+    <section id="mainheader">
+        <h1>PICK A MOVIE THAT INTERESTS YOU FROM EACH CATEGORY!</h1>
+    </section>
+    <h1 class="comedytitle">Comedy</h1>
+    <div class="container topcontainer">
         <div class="row">
-            <div class="col-md6 float-left">
-                <a href="#" onclick="return hideFunction(1);"><img src="./imgQuiz/wardogs.jpg" id="movie1" ></a>
-                <a href="#" onclick="return hideFunction(2);"><img src="./imgQuiz/niceguys.png" id="movie2"></a>
+            <div class="quiz1top">
+                <a href="#" id="movie1" onclick="return hideFunction(1);"><img src="./imgQuiz/wardogs.jpg" ></a>
+                <a href="#"id="movie2" onclick="return hideFunction(2);"><img src="./imgQuiz/niceguys.png" ></a>
             </div>
-            <div class="col-md6 float-right">
-                <a href="#" onclick="return hideFunction(3);"><img src="./imgQuiz/neighbors.jpg" id="movie3"></a>
+        </div>
+
+        <div class="row">
+            <div class="quiz1bot">
+               <a href="#" onclick="return hideFunction(3);"><img src="./imgQuiz/neighbors.jpg" id="movie3"></a>
                 <a href="#" onclick="return hideFunction(4);"><img src="./imgQuiz/zootopia.jpeg" id="movie4"></a>
             </div>
         </div>
+
     </div>
     <div class="container2" id="summary" style="align:right;">
         Insert text here
