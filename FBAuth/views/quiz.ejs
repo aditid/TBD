@@ -13,22 +13,56 @@
     <section id="mainheader">
         <h1>PICK A MOVIE THAT INTERESTS YOU FROM EACH CATEGORY!</h1>
     </section>
+
     <h1 class="comedytitle">Comedy</h1>
     <div class="container topcontainer">
         <div class="row">
             <div class="quiz1top">
-                <a href="#" onclick="return hideFunction(1, 'war dogs');"><img src="./imgQuiz/wardogs.jpg " class = "movie1" id="war%20dogs"></a>
-                <a href="#" onclick="return hideFunction(2, 'nice guys');"><img src="./imgQuiz/niceguys.png" class = "movie2" id="nice%20guys"></a>
+                <a href="#!" onclick="return hideFunction(1, 'war dogs');"><img src="./imgQuiz/wardogs.jpg " class = "movie1" id="wardogs"></a>
+                <a href="#!" onclick="return hideFunction(2, 'pineapple express');"><img src="./imgQuiz/pineapple.jpg" class = "movie2" id="pineappleexpress"></a>
             </div>
         </div>
         <div class="row">
             <div class="quiz1bot">
-               <a href="#" onclick="return hideFunction(3, 'neighbors');"><img src="./imgQuiz/neighbors.jpg" class = "movie3" id="neighbors"></a>
-                <a href="#" onclick="return hideFunction(4, 'zootopia');"><img src="./imgQuiz/zootopia.jpeg" class = "movie4" id="zootopia"></a>
+               <a href="#!" onclick="return hideFunction(3, 'borat');"><img src="./imgQuiz/borat.jpg" class = "movie3" id="borat"></a>
+                <a href="#!" onclick="return hideFunction(4, 'zootopia');"><img src="./imgQuiz/zootopia.jpeg" class = "movie4" id="zootopia"></a>
             </div>
         </div>
-
     </div>
+
+
+    <h1 class="horrortitle">Horror</h1>
+    <div class="container topcontainer">
+        <div class="row">
+            <div class="quiz2top">
+                <a href="#!" onclick="return hideFunction(5, 'the exorcist');"><img src="./imgQuiz/theexorcist.jpg " class = "movie5" id="theexorcist"></a>
+                <a href="#!" onclick="return hideFunction(6, 'the babadook');"><img src="./imgQuiz/thebabadook.jpg" class = "movie6" id="thebabadook"></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="quiz2bot">
+                <a href="#!" onclick="return hideFunction(7, 'get out');"><img src="./imgQuiz/getout.jpg" class = "movie7" id="getout"></a>
+                <a href="#!" onclick="return hideFunction(8, 'the conjuring');"><img src="./imgQuiz/theconjuring.jpg" class = "movie8" id="theconjuring"></a>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="title">Romance</h1>
+    <div class="container topcontainer">
+        <div class="row">
+            <div class="quiz2top">
+                <a href="#!" onclick="return hideFunction(9, 'la la land');"><img src="./imgQuiz/lalaland.jpg " class = "movie9" id="lalaland"></a>
+                <a href="#!" onclick="return hideFunction(10, 'titanic');"><img src="./imgQuiz/titanic.jpg" class = "movie10" id="titanic"></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="quiz2bot">
+                <a href="#!" onclick="return hideFunction(11, 'fifty shades of grey');"><img src="./imgQuiz/fiftyshades.jpg" class = "movie11" id="fiftyshades"></a>
+                <a href="#!" onclick="return hideFunction(12, 'the notebook');"><img src="./imgQuiz/notebook.jpg" class = "movie12" id="notebook"></a>
+            </div>
+        </div>
+    </div>
+
     <div class="container2" id="summary" style="align:right;">
         Insert text here
     </div>
@@ -54,13 +88,11 @@
 
     function findAndGetPlot(name)
     {
-        name = "war Dogs";  //placeholder
+        name = name;  //placeholder
         replaced = name.replace(/ /g, '+')
         url1 = "http://www.omdbapi.com/?t=" + String(replaced) + "&apikey=f74021da";
-
         omdbInfo = httpGet(url1)
         parsedOmdb = JSON.parse(omdbInfo)
-
         console.log(parsedOmdb.Plot)
         document.getElementById("summary").innerHTML = parsedOmdb.Plot;
     }
@@ -68,17 +100,13 @@
     function getId(name)  //TMDB
     {
         console.log('Entered getId')
-/*        name = "war Dogs";  //placeholder*/
         name = name;
         console.log(name)
         replaced = name.replace(/ /g, '%20')
-
         url2 = "https://api.themoviedb.org/3/search/movie?api_key=f37192bac1820d00d2a11439b5535fb3&language=en-US&query=" + String(replaced)+ "&page=1&include_adult=false"
-
         console.log(url2)
         tmdbInfo = httpGet(url2);
         parsedTmdb = JSON.parse(tmdbInfo);
-
         filmId = parsedTmdb.results["0"]["id"];
         return filmId;
     }
@@ -88,22 +116,17 @@
     {
         filmId = getId(name)
         url3 = "https://api.themoviedb.org/3/movie/" + String(filmId) + "/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3"
-
         recommendations = httpGet(url3);
         console.log(recommendations);
         parsedRec = JSON.parse(tmdbInfo);
-
         return parsedRec
-
     }
 
     function getRecommendationsById(id)
     {
         url3 = "https://api.themoviedb.org/3/movie/" + String(id) + "/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3"
-
         recommendations = httpGet(url3);
         parsedRec = JSON.parse(tmdbInfo);
-
         return parsedRec;
     }
 
@@ -119,8 +142,6 @@
             console.log(picStr);
             //document.getElementById(picStr).src = picture;
         }
-
-
     }
     function httpGet(theUrl)
     {
@@ -130,55 +151,61 @@
         return xmlHttp.responseText;
     }
 
+    function hideFunction(id ,id2) {
 
-/*    function httpGet(theUrl) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(xhttp.responseText)
+        if (id < 5) {
+            for (i = 1; i < 5; i++) {
+                if (id == i) {
+                    console.log(i)
+                    choosen = "movie" + String(i);
+                }
+                else {
+                    others = "movie" + String(i);
+                    var_name = document.getElementsByClassName(String(others))[0].style.display = 'none';
+                }
             }
-        };
-        xhttp.open("GET", theUrl, false);
-        xhttp.send();
-        return xhttp.responseText;
-
-}*/
-
-    // UNCHANGED ADITI FUNCTION //
-/*    function hideFunction(id)
-    {console.log('debug1');
-    for (i = 1; i < 5; i++) {
-        if (id == i) {
-            console.log(i)
-
-            parsedRec = getRecommendationsByName(id)
-            getPictures(parsedRec)
-            }
-        else {
-        choosen = "movie" + String(i);
-        var_name = document.getElementById(String(choosen)).style.display = 'none';
-            }
+            document.getElementsByClassName(String(choosen))[0].style.width = '354px';
+            document.getElementsByClassName(String(choosen))[0].style.height = '506px';
+            parsedRec = getRecommendationsByName(id2);
+            getPictures(parsedRec);
         }
-    }*/
 
-    function hideFunction(id ,id2)
-    {console.log('debug1');
-        for (i = 1; i < 5; i++) {
-            if (id == i) {
-                console.log(i)
-                choosen = "movie" + String(i);
+
+        if (id < 9 && id > 4) {
+            for (i = 5; i < 9; i++) {
+                if (id == i) {
+                    console.log(i)
+                    choosen = "movie" + String(i);
+                }
+                else {
+                    others = "movie" + String(i);
+                    var_name = document.getElementsByClassName(String(others))[0].style.display = 'none';
+                }
             }
-            else {
-                others = "movie" + String(i);
-                var_name = document.getElementsByClassName(String(others))[0].style.display = 'none';
-            }
+            document.getElementsByClassName(String(choosen))[0].style.width = '354px';
+            document.getElementsByClassName(String(choosen))[0].style.height = '506px';
+            parsedRec = getRecommendationsByName(id2);
+            getPictures(parsedRec);
         }
-        document.getElementsByClassName(String(choosen))[0].style.width = '343px';
-        parsedRec = getRecommendationsByName(id2);
-        getPictures(parsedRec);
+
+        if (id < 13 && id > 8) {
+            for (i = 9; i < 13; i++) {
+                if (id == i) {
+                    console.log(i)
+                    choosen = "movie" + String(i);
+                }
+                else {
+                    others = "movie" + String(i);
+                    var_name = document.getElementsByClassName(String(others))[0].style.display = 'none';
+                }
+            }
+            document.getElementsByClassName(String(choosen))[0].style.width = '354px';
+            document.getElementsByClassName(String(choosen))[0].style.height = '506px';
+            parsedRec = getRecommendationsByName(id2);
+            getPictures(parsedRec);
+        }
+
     }
-
-
 
     </script>
 
