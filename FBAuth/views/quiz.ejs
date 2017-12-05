@@ -63,11 +63,16 @@
         </div>
     </div>
 
-    <div class="container2" id="summary" style="align:right;">
-        Insert text here
+    <div class="quiz" id="recs3">
+        <h3>Click for recommendations!</h3>
+        <a href="#" onclick="return main()" class="btn btn-default btn-md">Quiz</a>
     </div>
-        <div class="container3">
-            <div class="row">
+
+
+    <!–– this creates whitespace where it is supposed to be, it can be display:none to avoid that––>
+    <h1 class="title" id="recs" style="visibility:hidden;">Recommendations</h1>
+    <div class="container topcontainer" id="recs2" style="visibility:hidden;">
+        <div class="row">
                 <div class="col-md6 float-left">
                     <a><img src="" id="poster1"></a>
                     <a><img src="" id="poster2"></a>
@@ -81,10 +86,14 @@
         </div>
 
     <script>
-
 /*    x = httpGet("https://api.themoviedb.org/3/movie/550/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3")
     parsedx = JSON.parse(x)
     console.log(parsedx.results["0"])*/
+
+    //Global Variable
+    var chosen = [];
+    var recommendationsArray = [];
+
 
     function findAndGetPlot(name)
     {
@@ -99,7 +108,6 @@
 ////  THIS FUNCTION HAS BEEN UPDATED TO RECEIVE MOVIE RECOMMENDATION BASED ON USER SELECTION !!
     function getId(name)  //TMDB
     {
-        console.log('Entered getId')
         name = name;
         console.log(name)
         replaced = name.replace(/ /g, '%20')
@@ -117,7 +125,6 @@
         filmId = getId(name)
         url3 = "https://api.themoviedb.org/3/movie/" + String(filmId) + "/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3"
         recommendations = httpGet(url3);
-        console.log(recommendations);
         parsedRec = JSON.parse(tmdbInfo);
         return parsedRec
     }
@@ -130,15 +137,20 @@
         return parsedRec;
     }
 
-    function getPictures(parsedRec)
+    function getPictures()
     {
-        console.log(parsedRec)
-        for (i = 0; i < 4; i++) {
-            posterPath = parsedRec.results[i]["poster_path"];
+        for (i = 0; i < 3; i++) {
+            posterPath = recommendationsArray[i]["poster_path"];
+            console.log(posterPath)
             url4 = "http://image.tmdb.org/t/p/w185" + String(posterPath);
             picStr = "poster" + String(i+1);
             document.getElementById(picStr).src = url4;   //inserts image url into div
         }
+        //unhide divs
+        document.getElementById('recs').style.visibility = 'visible';
+        document.getElementById('recs2').style.visibility = 'visible';
+        document.getElementById('recs3').style.visibility = 'hidden';
+
     }
 
     function httpGet(theUrl)
@@ -149,10 +161,39 @@
         return xmlHttp.responseText;
     }
 
+    function main(){
+        if (chosen.length < 3)
+        {
+            //alert user here
+        }
+        for (i = 0; i < 3; i++) {   //choose random recommendations for each movie
+            movieName = chosen[i];
+
+            parsedRec = getRecommendationsByName(movieName);
+
+            lengthRec = parsedRec.results.length;
+
+            randomNumber = Math.floor((Math.random() * lengthRec));
+
+            recs = parsedRec.results[String(randomNumber)];
+
+            recommendationsArray.push(recs);
+        }
+       getPictures()
+    }
+
     function hideFunction(id ,id2) {
 
         if (id < 5) {
-            for (i = 1; i < 5; i++) {
+            j = 1, k = 5;
+        }
+        else if (id < 9 && id > 4) {
+            j = 5, k = 9;
+        }
+        else if (id < 13 && id > 8) {
+            j = 9, k = 13;
+        }
+        for (i = j; i < k; i++) {
                 if (id == i) {
                     console.log(i)
                     choosen = "movie" + String(i);
@@ -161,48 +202,13 @@
                     others = "movie" + String(i);
                     var_name = document.getElementsByClassName(String(others))[0].style.display = 'none';
                 }
-            }
-            document.getElementsByClassName(String(choosen))[0].style.width = '354px';
-            document.getElementsByClassName(String(choosen))[0].style.height = '506px';
-            parsedRec = getRecommendationsByName(id2);
-            getPictures(parsedRec);
         }
 
-
-        if (id < 9 && id > 4) {
-            for (i = 5; i < 9; i++) {
-                if (id == i) {
-                    console.log(i)
-                    choosen = "movie" + String(i);
-                }
-                else {
-                    others = "movie" + String(i);
-                    var_name = document.getElementsByClassName(String(others))[0].style.display = 'none';
-                }
-            }
-            document.getElementsByClassName(String(choosen))[0].style.width = '354px';
-            document.getElementsByClassName(String(choosen))[0].style.height = '506px';
-            parsedRec = getRecommendationsByName(id2);
-            getPictures(parsedRec);
-        }
-
-        if (id < 13 && id > 8) {
-            for (i = 9; i < 13; i++) {
-                if (id == i) {
-                    console.log(i)
-                    choosen = "movie" + String(i);
-                }
-                else {
-                    others = "movie" + String(i);
-                    var_name = document.getElementsByClassName(String(others))[0].style.display = 'none';
-                }
-            }
-            document.getElementsByClassName(String(choosen))[0].style.width = '354px';
-            document.getElementsByClassName(String(choosen))[0].style.height = '506px';
-            parsedRec = getRecommendationsByName(id2);
-            getPictures(parsedRec);
-        }
-
+        document.getElementsByClassName(String(choosen))[0].style.width = '354px';
+        document.getElementsByClassName(String(choosen))[0].style.height = '506px';
+        chosen.push(id2)
+        //parsedRec = getRecommendationsByName(id2);
+        //getPictures(parsedRec);
     }
 
     </script>
