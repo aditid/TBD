@@ -103,6 +103,22 @@
                 </div>
             </div>
         </div>
+        <div class="row" id="recommend3">
+            <div class="center">
+                <div class="col-md-3">
+                    <a><p id="ratings1"></p></a>
+                </div>
+                <div class="col-md-3">
+                    <a><p id="ratings2"></p></a>
+                </div>
+                <div class="col-md-3">
+                    <a><p id="ratings3"></p></a>
+                </div>
+                <div class="col-md-3">
+                    <a><p id="ratings4"></p></a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -110,16 +126,30 @@
     parsedx = JSON.parse(x)
     console.log(parsedx.results["0"])*/
 
-    //Global Variable
+    //Global Variables
     var chosen = [];
     var recommendationsArray = [];
+    var imdbKey = '';
+    var omdbKey = '';
+    FileHelper('keys.txt')
 
+    function FileHelper(filePath)
+
+    {
+            var request = new XMLHttpRequest();
+            request.open("GET", filePath, false);
+            request.send(null);
+            var returnValue = request.responseText;
+            var returnValues = returnValue.split(',')
+            imdbKey = returnValues[0];
+            omdbKey = returnValues[1];
+    }
 
     function findAndGetPlot(name)
     {
         name = name;  //placeholder
         replaced = name.replace(/ /g, '+')
-        url1 = "http://www.omdbapi.com/?t=" + String(replaced) + "&apikey=f74021da";
+        url1 = "http://www.omdbapi.com/?t=" + String(replaced) + "&apikey=" + omdbKey;
         omdbInfo = httpGet(url1)
         parsedOmdb = JSON.parse(omdbInfo)
         return parsedOmdb.Plot;
@@ -131,7 +161,7 @@
     {
         name = name;  //placeholder
         replaced = name.replace(/ /g, '+')
-        url1 = "http://www.omdbapi.com/?t=" + String(replaced) + "&apikey=f74021da";
+        url1 = "http://www.omdbapi.com/?t=" + String(replaced) + "&apikey=" + omdbKey;
         omdbInfo = httpGet(url1)
         parsedOmdb = JSON.parse(omdbInfo)
         return parsedOmdb.Ratings
@@ -144,7 +174,7 @@
         name = name;
         console.log(name)
         replaced = name.replace(/ /g, '%20')
-        url2 = "https://api.themoviedb.org/3/search/movie?api_key=f37192bac1820d00d2a11439b5535fb3&language=en-US&query=" + String(replaced)+ "&page=1&include_adult=false"
+        url2 = "https://api.themoviedb.org/3/search/movie?api_key=" + imdbKey + "&language=en-US&query=" + String(replaced)+ "&page=1&include_adult=false"
         console.log(url2)
         tmdbInfo = httpGet(url2);
         parsedTmdb = JSON.parse(tmdbInfo);
@@ -156,7 +186,7 @@
     function getRecommendationsByName(name)
     {
         filmId = getId(name)
-        url3 = "https://api.themoviedb.org/3/movie/" + String(filmId) + "/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3"
+        url3 = "https://api.themoviedb.org/3/movie/" + String(filmId) + "/recommendations?api_key=" + imdbKey + "&language=en-US"
         recommendations = httpGet(url3);
         parsedRec = JSON.parse(tmdbInfo);
         return parsedRec
@@ -164,7 +194,7 @@
 
     function getRecommendationsById(id)
     {
-        url3 = "https://api.themoviedb.org/3/movie/" + String(id) + "/recommendations?api_key=f37192bac1820d00d2a11439b5535fb3"
+        url3 = "https://api.themoviedb.org/3/movie/" + String(id) + "/recommendations?api_key=" + imdbKey + "&language=en-US"
         recommendations = httpGet(url3);
         parsedRec = JSON.parse(tmdbInfo);
         return parsedRec;
@@ -189,11 +219,35 @@
     function getPlot()
     {
         for (i = 0; i < 4; i++) {
-            plot = findAndGetPlot(chosen[i])
+            //plot = findAndGetPlot(recommendationsArray[i]['original_title'])
+            plot = recommendationsArray[i]['overview'];
             plotStr = "plot" + String(i+1);
             document.getElementById(plotStr).innerHTML = plot;
         }
     }
+
+    function getRatings()
+    {
+        for (i = 0; i < 4; i++) {
+            ratings = findAndGetRatings(recommendationsArray[i]['original_title']);
+            console.log(ratings);
+            if (ratings.length == 3) {
+                ratingsHtml = ratings['0']['Source'] + ": " + ratings['0']['Value'] + "<br>" + ratings['1']['Source'] + ": " + ratings['1']['Value'] + "<br>" + ratings['2']['Source'] + ": " + ratings['2']['Value'];
+            }
+            else if (ratings.length == 2) {
+                ratingsHtml = ratings['0']['Source'] + ": " + ratings['0']['Value'] + "<br>" + ratings['1']['Source'] + ": " + ratings['1']['Value'] + "<br>";
+            }
+            else if (ratings.length == 1) {
+                ratingsHtml = ratings['0']['Source'] + ": " + ratings['0']['Value'];
+            }
+            else {
+                ratingsHtml = "Ratings not found"
+            }
+            ratingStr = "ratings" + String(i+1);
+            document.getElementById(ratingStr).innerHTML = ratingsHtml;
+        }
+    }
+
 
 
     function httpGet(theUrl)
@@ -208,10 +262,12 @@
         //add one more movie for a random genre
         randomNumber0 = Math.floor((Math.random() * 3));
         chosen.push(chosen[randomNumber0]);
+        recommendationsArray = [];
 
         if (chosen.length < 3)
         {
             //alert user here
+            alert("I am an alert box! Please select a movie from each category");
         }
         for (i = 0; i < 4; i++) {   //choose random recommendations for each movie
             movieName = chosen[i];
@@ -228,7 +284,7 @@
         }
        getPictures();
         getPlot();
-
+        getRatings();
 
     }
 
