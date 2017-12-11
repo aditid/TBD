@@ -1,5 +1,6 @@
 # TBD
 Software Engineering Project for CS 411
+A2 Group 3
 
 
 To Run:
@@ -8,5 +9,6 @@ To Run:
 Then go to:
 http://localhost:8000/
 
-
-Type in movie name
+Log In with Facebook Account
+Take a Short Quiz
+Get Recommandation List for Movies
