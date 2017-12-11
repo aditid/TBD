@@ -1,4 +1,4 @@
-# TBD
+# CS 411 A2 Group 3
 Software Engineering Project for CS 411
 A2 Group 3
 
